@@ -1,0 +1,14 @@
+button {
+    background-color: rgb(0, 183, 255);
+    border: none;
+    border-radius: .5rem;
+    padding: .8rem 1.8rem;
+    font-weight: bold;
+    margin: 0 1rem;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background-color: rgb(1, 148, 206);
+    transition: .4s;
+}
