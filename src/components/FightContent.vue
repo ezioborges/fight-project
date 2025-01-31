@@ -1,18 +1,27 @@
 <template>
   <div class="fight-content">
-      <Gamers force-side="Jogador" :hp-percent="hpGamer" />
-      <Gamers force-side="Monstro" :hp-percent="hpMonster"/>
+      <div class="gamers">
+        <h1>Jogador</h1>
+        
+        <div class="life-border">
+            <div class="life-bar-gamer" :style="{width: hpGamer + '%' }"></div>
+        </div>
+        <!-- <span>{{hpGamer}}%</span> -->
+      </div>
+        <div class="gamers">
+        <h1>Monstro</h1>
+        <div class="life-border">
+            <div class="life-bar-monster" :style="{width: hpMonster + '%' }"></div>
+        </div>
+        <!-- <span>{{hpMonster}}%</span> -->
+    </div>
   </div>
 </template>
 
 <script>
-import Gamers from './Gamers.vue';
 
 export default {
-  name: 'FightContent',
-  components: {
-    Gamers
-  }, 
+  name: 'FightContent', 
   props: ['hpGamer', 'hpMonster']
 }
 </script>
@@ -20,6 +29,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 @import '../styles/fight-content.css';
+@import '../styles/gamers.css';
 h3 {
   margin: 40px 0 0;
 }

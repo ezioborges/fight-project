@@ -10,6 +10,8 @@
             :healthHp="healthHp"
             :specialAttack="specialAttack"
             :giveUp="giveUp"
+            :gamerLost="gamerLost"
+            :monsterLost="monsterLost"
             />
 
     </div>
@@ -30,7 +32,7 @@ import Buttons from './Buttons.vue';
                 buttonsStatedNames: ['ataque', 'ataque especial', 'curar', 'desistir']
             }
         },
-        props: ['hpGamer', 'hpMonster', 'attack', 'healthHp', 'specialAttack', 'giveUp', 'started', 'startGame'],
+        props: ['hpGamer', 'hpMonster', 'attack', 'healthHp', 'specialAttack', 'giveUp', 'started', 'startGame', 'gamerLost', 'monsterLost'],
     }
 </script>
 

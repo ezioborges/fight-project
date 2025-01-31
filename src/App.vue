@@ -3,6 +3,7 @@
     <FightContent 
       :hpGamer="hpGamer"
       :hpMonster="hpMonster"
+      :gamerLost="gamerLost"
       />
 
     <ControllerComponent
@@ -14,7 +15,10 @@
       :giveUp="giveUp"
       :started="started"
       :startGame="startGame"
+      :gamerLost="gamerLost"
+      :monsterLost="monsterLost"
       />
+      <Rounds :moveGamerArray="moveGamerArray" />
   </div>
 </template>
 
@@ -22,18 +26,23 @@
 
 import ControllerComponent from './components/ControllerComponent.vue';
 import FightContent from './components/FightContent.vue';
+import Rounds from './components/Rounds.vue';
 
 export default {
   name: 'App',
   components: {
     FightContent,
     ControllerComponent,
+    Rounds
   }, 
   data() {
     return {
       hpGamer: 100,
       hpMonster: 100,
       started: false,
+      moveGamerArray: [],
+      gamerLost: false,
+      monsterLost: false
     }
   },
   methods: {
@@ -42,29 +51,70 @@ export default {
     },
 
     attack() {
-      //tanto o jogador quanto o monstro atacam jogador entre 5 e 12 monstro entre 8 e 12
       const gamerAttackLost = this.randomAttack(8, 15)
       const mosnterAttackLost = this.randomAttack(5, 10)
-      console.log("🚀 ~ attack ~ gamerAttackLost:", gamerAttackLost)
-      console.log("🚀 ~ attack ~ mosnterAttackLost:", mosnterAttackLost)
       this.hpGamer = this.hpGamer - gamerAttackLost
       this.hpMonster = this.hpMonster - mosnterAttackLost
+
+      if (this.hpGamer <= 0 && this.hpGamer < this.hpMonster) {
+        this.gamerLost = true
+        this.hpGamer = 0
+      }
+
+      if (this.hpMonster <= 0 && this.hpGamer > this.hpMonster) {
+        this.monsterLost = true;
+        this.hpMonster = 0;
+      }
+
+      if (this.hpGamer <= 30) {
+        const hp = document.querySelector('.life-bar-gamer')
+        hp.style.backgroundColor = "red" 
+      }
+
+      if (this.hpMonster <= 30) {
+        const hp = document.querySelector('.life-bar-monster')
+        hp.style.backgroundColor = "red" 
+      }
+
+      this.moveGamerArray.push({gamer: mosnterAttackLost, monster: gamerAttackLost});
     },
 
     randomAttack(min, max) {
       const minCeiled = Math.ceil(min);
       const maxFloored = Math.floor(max);
-      const random = Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled)
+      const random = Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
                   
       return random;
     },
 
     specialAttack() {
-      const gamerspaecialLost = this.randomAttack(25, 30)
-      const monsterspaecialLost = this.randomAttack(28, 35)
+      const gamerSpaecialLost = this.randomAttack(25, 30);
+      const monsterSpecialLost = this.randomAttack(28, 35);
 
-      this.hpGamer = this.hpGamer - gamerspaecialLost;
-      this.hpMonster = this.hpMonster - monsterspaecialLost
+      this.hpGamer = this.hpGamer - gamerSpaecialLost;
+      this.hpMonster = this.hpMonster - monsterSpecialLost;
+
+      if (this.hpGamer <= 0 && this.hpGamer < this.hpMonster) {
+        this.gamerLost = true
+        this.hpGamer = 0
+      }
+
+      if (this.hpMonster <= 0 && this.hpGamer > this.hpMonster) {
+        this.monsterLost = true;
+        this.hpMonster = 0;
+      } 
+      
+      if (this.hpGamer <= 30) {
+        const hp = document.querySelector('.life-bar-gamer')
+        hp.style.backgroundColor = 'red'
+      }
+
+      if (this.hpMonster <= 30) {
+        const hp = document.querySelector('.life-bar-monster')
+        hp.style.backgroundColor = 'red'
+      }
+
+      this.moveGamerArray.push({gamer: monsterSpecialLost, monster: gamerSpaecialLost})
     },
 
     healthHp(cureValue) {
@@ -78,7 +128,8 @@ export default {
     giveUp() {
       this.hpGamer = 100;
       this.hpMonster = 100;
-      this.started = false
+      this.started = false;
+      this.moveGamerArray = [];
     }
   }
 }

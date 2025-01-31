@@ -11,9 +11,20 @@ h1 {
     margin-bottom: 1rem;
 }
 
-.life-bar {
+.life-bar-gamer {
+    /* width: 100%; */
+    height: 100%;
+    background-color: green ;
+}
+
+.life-bar-monster {
+    height: 100%;
+    background-color: green ;
+}
+
+.life-border {
     width: 15rem;
     height: 1rem;
-    background-color: green;
+    border: 1px solid green;
     margin-bottom: .5rem;
 }
