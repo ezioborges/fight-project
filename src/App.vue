@@ -47,7 +47,9 @@ export default {
   },
   methods: {
     startGame() {
-            this.started = true
+            this.started = true;
+            this.hpGamer = 100;
+            this.monster = 100;
     },
 
     attack() {
@@ -76,13 +78,13 @@ export default {
         hp.style.backgroundColor = "red" 
       }
 
-      this.moveGamerArray.push({gamer: mosnterAttackLost, monster: gamerAttackLost});
+      this.moveGamerArray.unshift({gamer: mosnterAttackLost, monster: gamerAttackLost});
     },
 
     randomAttack(min, max) {
       const minCeiled = Math.ceil(min);
       const maxFloored = Math.floor(max);
-      const random = Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
+      const random = Math.round(Math.random() * (maxFloored - minCeiled) + minCeiled);
                   
       return random;
     },
@@ -114,7 +116,7 @@ export default {
         hp.style.backgroundColor = 'red'
       }
 
-      this.moveGamerArray.push({gamer: monsterSpecialLost, monster: gamerSpaecialLost})
+      this.moveGamerArray.unshift({gamer: monsterSpecialLost, monster: gamerSpaecialLost})
     },
 
     healthHp(cureValue) {

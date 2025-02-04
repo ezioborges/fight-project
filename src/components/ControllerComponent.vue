@@ -1,7 +1,6 @@
 <template>
     <div class="controller-content">
         <Buttons 
-            :buttonsStatedNames="buttonsStatedNames"
             :started="started"
             :startGame="startGame"
             :hpGamer="hpGamer"
@@ -27,11 +26,6 @@ import Buttons from './Buttons.vue';
             Buttons
         },
         
-        data() {
-            return {
-                buttonsStatedNames: ['ataque', 'ataque especial', 'curar', 'desistir']
-            }
-        },
         props: ['hpGamer', 'hpMonster', 'attack', 'healthHp', 'specialAttack', 'giveUp', 'started', 'startGame', 'gamerLost', 'monsterLost'],
     }
 </script>

@@ -16,7 +16,7 @@
 
     export default {
         name: "Buttons",
-        props: ['started', 'buttonsStatedNames', 'hpGamer', 'hpMonster', 'attack', 'healthHp', 'specialAttack', 'giveUp', 'startGame', 'gamerLost', 'monsterLost'],
+        props: ['started', 'hpGamer', 'hpMonster', 'attack', 'healthHp', 'specialAttack', 'giveUp', 'startGame', 'gamerLost', 'monsterLost'],
     }
 </script>
 
